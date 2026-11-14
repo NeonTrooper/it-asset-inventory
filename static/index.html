@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IT Asset Inventory</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>IT Asset Inventory</h1>
+      <p>Every device, who has it, where it is and when its warranty ends.</p>
+    </div>
+    <button type="button" class="primary" id="add">Add asset</button>
+  </header>
+
+  <dl class="tiles" id="tiles"></dl>
+
+  <main class="panel">
+    <div class="filters">
+      <input id="q" type="search" placeholder="Search tag, model, serial, person or location" aria-label="Search">
+      <select id="f-status" aria-label="Filter by status"></select>
+      <select id="f-type" aria-label="Filter by type"></select>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Tag</th><th>Type</th><th>Model</th><th>Status</th><th>Assigned to</th><th>Location</th><th>Warranty</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p id="empty" class="empty" hidden>No assets match.</p>
+  </main>
+
+  <!-- Add / edit form -->
+  <dialog id="dialog">
+    <form id="form" method="dialog" novalidate>
+      <h2 id="dialog-title">Add asset</h2>
+      <div class="grid">
+        <label>Asset tag<input name="tag" maxlength="20" required placeholder="LT-0042"></label>
+        <label>Type<select name="type" id="type"></select></label>
+        <label class="wide">Model<input name="model" maxlength="80" required></label>
+        <label>Serial number<input name="serial" maxlength="60"></label>
+        <label>Status<select name="status" id="status"></select></label>
+        <label>Assigned to<input name="assigned_to" maxlength="80"></label>
+        <label>Location<input name="location" maxlength="80"></label>
+        <label>Warranty end<input name="warranty_end" type="date"></label>
+      </div>
+      <p id="errors" class="errors" role="alert"></p>
+      <div class="buttons">
+        <button type="button" id="cancel">Cancel</button>
+        <button type="submit" class="primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- History of one asset -->
+  <dialog id="history">
+    <h2 id="history-title">History</h2>
+    <ul id="history-list" class="history"></ul>
+    <div class="buttons"><button type="button" id="history-close">Close</button></div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
